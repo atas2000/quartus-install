@@ -59,19 +59,19 @@ def generate_pro_url(quartus_version, minor_version, revision):
     version_url = "%s/%s/%s/ib_installers" % (base_url, quartus_version, revision)
     pro_urls = {}
     if quartus_version >= '19.3':
-        pro_urls.update( { "setup" : "%s/QuartusProSetup-%s-linux.run" % (version_url, full_version) } )
-        pro_urls.update( { "setup_part2" : "%s/QuartusProSetup-part2-%s-linux.run" % (version_url, full_version) } )
+        pro_urls.update( { "setup" : "%s/QuartusProSetup-%s-windows.exe" % (version_url, full_version) } )
+        pro_urls.update( { "setup_part2" : "%s/QuartusProSetup-part2-%s-windows.exe" % (version_url, full_version) } )
     else:
-        pro_urls.update( { "setup" : "%s/QuartusProSetup-%s-linux.run" % (version_url, full_version) } )
+        pro_urls.update( { "setup" : "%s/QuartusProSetup-%s-windows.exe" % (version_url, full_version) } )
 
     if quartus_version >= '19.2':
-        pro_urls.update( { "modelsim_part1" : "%s/ModelSimProSetup-%s-linux.run" % (version_url, full_version) } )
-        pro_urls.update( { "modelsim_part2" : "%s/ModelSimProSetup-part2-%s-linux.run" % (version_url, full_version) } )
+        pro_urls.update( { "modelsim_part1" : "%s/ModelSimProSetup-%s-windows.exe" % (version_url, full_version) } )
+        pro_urls.update( { "modelsim_part2" : "%s/ModelSimProSetup-part2-%s-windows.exe" % (version_url, full_version) } )
     else:
-        pro_urls.update( { "modelsim_" : "%s/ModelSimProSetup-%s-linux.run" % (version_url, full_version) } )
+        pro_urls.update( { "modelsim_" : "%s/ModelSimProSetup-%s-windows.exe" % (version_url, full_version) } )
 
     if quartus_version == '19.2':
-        pro_urls.update( { "modelsim_part2" : "%s/modelsim-part2-%s-linux.qdz" % (version_url, full_version) } )
+        pro_urls.update( { "modelsim_part2" : "%s/modelsim-part2-%s-windows.qdz" % (version_url, full_version) } )
 
     if quartus_version >= '20.1':
         pro_urls.update( { "agilex" : "%s/agilex-%s.qdz" % (version_url, full_version) } )
@@ -88,8 +88,8 @@ def generate_std_url(quartus_version, minor_version, revision, edition):
     version_url = "%s/%s%s/%s/ib_installers" % (base_url, quartus_version, edition, revision)
     full_version = "%s.%s.%s" % (quartus_version, minor_version, revision)
     urls = {}
-    urls.update( { "setup" : "%s/QuartusSetup-%s-linux.run" % (version_url, full_version) } )
-    urls.update( { "modelsim" : "%s/ModelSimSetup-%s-linux.run" % (version_url, full_version) } )
+    urls.update( { "setup" : "%s/QuartusSetup-%s-windows.exe" % (version_url, full_version) } )
+    urls.update( { "modelsim" : "%s/ModelSimSetup-%s-windows.exe" % (version_url, full_version) } )
     for part in [1,2,3]:
         urls.update( { "a10_part%d" % (part) : "%s/arria10_part%d-%s.qdz" % (version_url, part, full_version) } )
     fpgas = fpga_key
@@ -114,16 +114,16 @@ quartus_url_191std = generate_std_url('19.1', '0', '670', 'std')
 # some files weren't updated in this patch release
 for part in ["a5", "a10_part1", "a10_part2", "a10_part3", "a5gz"] :
     quartus_url_2011std[part] = quartus_url_201std[part]
-quartus_url_2011std['setup'] = "https://download.altera.com/akdlm/software/acdsinst/20.1std.1/720/ib_installers/QuartusSetup-20.1.1.720-linux.run"
+quartus_url_2011std['setup'] = "https://download.altera.com/akdlm/software/acdsinst/20.1std.1/720/ib_installers/QuartusSetup-20.1.1.720-windows.exe"
 
 
 # Lite have a different installer but the same device files
 quartus_url_2011lite = dict(quartus_url_2011std)
-quartus_url_2011lite['setup'] = "https://download.altera.com/akdlm/software/acdsinst/20.1std.1/720/ib_installers/QuartusLiteSetup-20.1.1.720-linux.run"
+quartus_url_2011lite['setup'] = "https://download.altera.com/akdlm/software/acdsinst/20.1std.1/720/ib_installers/QuartusLiteSetup-20.1.1.720-windows.exe"
 quartus_url_201lite = dict(quartus_url_201std)
-quartus_url_201lite['setup'] = "https://download.altera.com/akdlm/software/acdsinst/20.1std/711/ib_installers/QuartusLiteSetup-20.1.0.711-linux.run"
+quartus_url_201lite['setup'] = "https://download.altera.com/akdlm/software/acdsinst/20.1std/711/ib_installers/QuartusLiteSetup-20.1.0.711-windows.exe"
 quartus_url_191lite = dict(quartus_url_191std)
-quartus_url_191lite['setup'] = "https://download.altera.com/akdlm/software/acdsinst/19.1std/670/ib_installers/QuartusLiteSetup-19.1.0.670-linux.run"
+quartus_url_191lite['setup'] = "https://download.altera.com/akdlm/software/acdsinst/19.1std/670/ib_installers/QuartusLiteSetup-19.1.0.670-windows.exe"
 
 
 
@@ -131,27 +131,27 @@ quartus_url_191lite['setup'] = "https://download.altera.com/akdlm/software/acdsi
 # older versions, where each has sufficient quirks not to fit the pattern
 
 quartus_url_191pro = {
-    'setup' : 'https://download.altera.com/akdlm/software/acdsinst/19.1/240/ib_installers/QuartusProSetup-19.1.0.240-linux.run',
-    'modelsim_part1' : 'https://download.altera.com/akdlm/software/acdsinst/19.1/240/ib_installers/ModelSimProSetup-19.1.0.240-linux.run',
-    'modelsim_part2' : 'https://download.altera.com/akdlm/software/acdsinst/19.1/240/ib_installers/modelsim-part2-19.1.0.240-linux.qdz',
+    'setup' : 'https://download.altera.com/akdlm/software/acdsinst/19.1/240/ib_installers/QuartusProSetup-19.1.0.240-windows.exe',
+    'modelsim_part1' : 'https://download.altera.com/akdlm/software/acdsinst/19.1/240/ib_installers/ModelSimProSetup-19.1.0.240-windows.exe',
+    'modelsim_part2' : 'https://download.altera.com/akdlm/software/acdsinst/19.1/240/ib_installers/modelsim-part2-19.1.0.240-windows.qdz',
     'a10' : 'https://download.altera.com/akdlm/software/acdsinst/19.1/240/ib_installers/arria10-19.1.0.240.qdz',
     'c10gx' : 'https://download.altera.com/akdlm/software/acdsinst/19.1/240/ib_installers/cyclone10gx-19.1.0.240.qdz',
     's10' : 'https://download.altera.com/akdlm/software/acdsinst/19.1/240/ib_installers/stratix10-19.1.0.240.qdz',
-    'patch_0.03' : 'https://www.intel.com/content/dam/altera-www/global/en_US/support/knowledge-center/components/2019/quartus-19.1-0.03-linux.run'
+    'patch_0.03' : 'https://www.intel.com/content/dam/altera-www/global/en_US/support/knowledge-center/components/2019/quartus-19.1-0.03-windows.exe'
 }
 
 quartus_url_181pro = {
-    'setup' : 'https://download.altera.com/akdlm/software/acdsinst/18.1/222/ib_installers/QuartusProSetup-18.1.0.222-linux.run',
-    'modelsim_part1' : 'https://download.altera.com/akdlm/software/acdsinst/18.1/222/ib_installers/ModelSimProSetup-18.1.0.222-linux.run',
-    'modelsim_part2' : 'https://download.altera.com/akdlm/software/acdsinst/18.1/222/ib_installers/modelsim-part2-18.1.0.222-linux.qdz',
+    'setup' : 'https://download.altera.com/akdlm/software/acdsinst/18.1/222/ib_installers/QuartusProSetup-18.1.0.222-windows.exe',
+    'modelsim_part1' : 'https://download.altera.com/akdlm/software/acdsinst/18.1/222/ib_installers/ModelSimProSetup-18.1.0.222-windows.exe',
+    'modelsim_part2' : 'https://download.altera.com/akdlm/software/acdsinst/18.1/222/ib_installers/modelsim-part2-18.1.0.222-windows.qdz',
     'a10' : 'https://download.altera.com/akdlm/software/acdsinst/18.1/222/ib_installers/arria10-18.1.0.222.qdz',
     'c10gx' : 'https://download.altera.com/akdlm/software/acdsinst/18.1/222/ib_installers/cyclone10gx-18.1.0.222.qdz',
     's10' : 'https://download.altera.com/akdlm/software/acdsinst/18.1/222/ib_installers/stratix10-18.1.0.222.qdz'
 }
 
 quartus_url_181std = {
-    'setup' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/QuartusSetup-18.1.0.625-linux.run',
-	'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/ModelSimSetup-18.1.0.625-linux.run',
+    'setup' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/QuartusSetup-18.1.0.625-windows.exe',
+	'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/ModelSimSetup-18.1.0.625-windows.exe',
 	'c4' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/cyclone-18.1.0.625.qdz',
 	'a5gz' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/arriavgz-18.1.0.625.qdz',
 	'a5' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/arriav-18.1.0.625.qdz',
@@ -165,19 +165,19 @@ quartus_url_181std = {
 	's5' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/stratixv-18.1.0.625.qdz',
 	'm10' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/max10-18.1.0.625.qdz',
 	'm2' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/max-18.1.0.625.qdz',
-	'opencl' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/AOCLSetup-18.1.0.625-linux.run',
-	'eds' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/SoCEDSSetup-18.1.0.625-linux.run',
-        'update_1': 'https://download.altera.com/akdlm/software/acdsinst/18.1std.1/646/update/QuartusSetup-18.1.1.646-linux.run'
+	'opencl' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/AOCLSetup-18.1.0.625-windows.exe',
+	'eds' : 'https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/SoCEDSSetup-18.1.0.625-windows.exe',
+        'update_1': 'https://download.altera.com/akdlm/software/acdsinst/18.1std.1/646/update/QuartusSetup-18.1.1.646-windows.exe'
         }
 
 quartus_url_181lite = dict(quartus_url_181std)
-quartus_url_181lite['setup'] = "https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/QuartusLiteSetup-18.1.0.625-linux.run"
+quartus_url_181lite['setup'] = "https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/QuartusLiteSetup-18.1.0.625-windows.exe"
 quartus_url_181lite['a2'] = "https://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_installers/arria_lite-18.1.0.625.qdz"
 
 
 quartus_url_171std = {
-    'setup' : 'https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/QuartusSetup-17.1.0.590-linux.run',
-    'modelsim' : "https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/ModelSimSetup-17.1.0.590-linux.run",
+    'setup' : 'https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/QuartusSetup-17.1.0.590-windows.exe',
+    'modelsim' : "https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/ModelSimSetup-17.1.0.590-windows.exe",
     'a2' : "https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/arria-17.1.0.590.qdz",
     'a10_part1' : "https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/arria10_part1-17.1.0.590.qdz",
     'a10_part2' : "https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/arria10_part2-17.1.0.590.qdz",
@@ -191,15 +191,15 @@ quartus_url_171std = {
     'a5gz' : "https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/arriav-17.1.0.590.qdz",
     'm5' : "https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/arriav-17.1.0.590.qdz",
     'm10' : "https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/arriav-17.1.0.590.qdz",
-    'update_1' : "https://download.altera.com/akdlm/software/acdsinst/17.1std.1/593/update/QuartusSetup-17.1.1.593-linux.run",
-    'dsp' : 'https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/DSPBuilderSetup-17.1.0.590-linux.run',
-    'opencl' : 'https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/AOCLSetup-17.1.0.590-linux.run',
-    'eds' : 'https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/SoCEDSSetup-17.1.0.590-linux.run'
+    'update_1' : "https://download.altera.com/akdlm/software/acdsinst/17.1std.1/593/update/QuartusSetup-17.1.1.593-windows.exe",
+    'dsp' : 'https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/DSPBuilderSetup-17.1.0.590-windows.exe',
+    'opencl' : 'https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/AOCLSetup-17.1.0.590-windows.exe',
+    'eds' : 'https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/SoCEDSSetup-17.1.0.590-windows.exe'
 }
 
 quartus_url_171pro = {
-    'setup' : "https://download.altera.com/akdlm/software/acdsinst/17.1/240/ib_installers/QuartusProSetup-17.1.0.240-linux.run",
-    'modelsim' : "https://download.altera.com/akdlm/software/acdsinst/17.1/240/ib_installers/QuartusProSetup-17.1.0.240-linux.run",
+    'setup' : "https://download.altera.com/akdlm/software/acdsinst/17.1/240/ib_installers/QuartusProSetup-17.1.0.240-windows.exe",
+    'modelsim' : "https://download.altera.com/akdlm/software/acdsinst/17.1/240/ib_installers/QuartusProSetup-17.1.0.240-windows.exe",
     'a10_part1' : "https://download.altera.com/akdlm/software/acdsinst/17.1/240/ib_installers/arria10_part1-17.1.0.240.qdz",
     'a10_part2' : "https://download.altera.com/akdlm/software/acdsinst/17.1/240/ib_installers/arria10_part2-17.1.0.240.qdz",
     'a10_part3' : "https://download.altera.com/akdlm/software/acdsinst/17.1/240/ib_installers/arria10_part3-17.1.0.240.qdz",
@@ -208,20 +208,20 @@ quartus_url_171pro = {
     's10_part1' : "https://download.altera.com/akdlm/software/acdsinst/17.1/240/ib_installers/stratix10_part1-17.1.0.240.qdz",
     's10_part2' : "https://download.altera.com/akdlm/software/acdsinst/17.1/240/ib_installers/stratix10_part2-17.1.0.240.qdz",
     's10_part3' : "https://download.altera.com/akdlm/software/acdsinst/17.1/240/ib_installers/stratix10_part3-17.1.0.240.qdz",
-    'update_1' : "https://download.altera.com/akdlm/software/acdsinst/17.1.2/304/update/QuartusProSetup-17.1.2.304-linux.run"
+    'update_1' : "https://download.altera.com/akdlm/software/acdsinst/17.1.2/304/update/QuartusProSetup-17.1.2.304-windows.exe"
 }
 
 quartus_url_180pro = {
-    'setup' : 'https://download.altera.com/akdlm/software/acdsinst/18.0/219/ib_installers/QuartusProSetup-18.0.0.219-linux.run',
+    'setup' : 'https://download.altera.com/akdlm/software/acdsinst/18.0/219/ib_installers/QuartusProSetup-18.0.0.219-windows.exe',
     'a10_part1' : "https://download.altera.com/akdlm/software/acdsinst/18.0/219/ib_installers/arria10-18.0.0.219.qdz",
     'c10gx_part1' : "https://download.altera.com/akdlm/software/acdsinst/18.0/219/ib_installers/cyclone10gx-18.0.0.219.qdz",
     's10_part1' : "https://download.altera.com/akdlm/software/acdsinst/18.0/219/ib_installers/stratix10-18.0.0.219.qdz",
-    'update_1': "https://download.altera.com/akdlm/software/acdsinst/18.0.1/261/update/QuartusProSetup-18.0.1.261-linux.run"
+    'update_1': "https://download.altera.com/akdlm/software/acdsinst/18.0.1/261/update/QuartusProSetup-18.0.1.261-windows.exe"
 }
 
 
 quartus_url_180std = {
-    'setup' : "https://download.altera.com/akdlm/software/acdsinst/18.0std/614/ib_installers/QuartusSetup-18.0.0.614-linux.run",
+    'setup' : "https://download.altera.com/akdlm/software/acdsinst/18.0std/614/ib_installers/QuartusSetup-18.0.0.614-windows.exe",
     'a2' : "https://download.altera.com/akdlm/software/acdsinst/18.0std/614/ib_installers/arria-18.0.0.614.qdz",
     'a10_part1' : "https://download.altera.com/akdlm/software/acdsinst/18.0std/614/ib_installers/arria10_part1-18.0.0.614.qdz",
     'a10_part2' : "https://download.altera.com/akdlm/software/acdsinst/18.0std/614/ib_installers/arria10_part2-18.0.0.614.qdz",
@@ -238,10 +238,10 @@ quartus_url_180std = {
 }
 
 quartus_url_180lite = dict(quartus_url_180std)
-quartus_url_180lite['setup'] = 'https://download.altera.com/akdlm/software/acdsinst/18.0std/614/ib_installers/QuartusLiteSetup-18.0.0.614-linux.run'
+quartus_url_180lite['setup'] = 'https://download.altera.com/akdlm/software/acdsinst/18.0std/614/ib_installers/QuartusLiteSetup-18.0.0.614-windows.exe'
 
 quartus_url_170pro = {
-    'setup' : "https://download.altera.com/akdlm/software/acdsinst/17.0/290/ib_installers/QuartusProSetup-17.0.0.290-linux.run",
+    'setup' : "https://download.altera.com/akdlm/software/acdsinst/17.0/290/ib_installers/QuartusProSetup-17.0.0.290-windows.exe",
     'a10_part1' : "https://download.altera.com/akdlm/software/acdsinst/17.0/290/ib_installers/arria10_part1-17.0.0.290.qdz",
     'a10_part2' : "https://download.altera.com/akdlm/software/acdsinst/17.0/290/ib_installers/arria10_part2-17.0.0.290.qdz",
     'a10_part3' : "https://download.altera.com/akdlm/software/acdsinst/17.0/290/ib_installers/arria10_part3-17.0.0.290.qdz",
@@ -250,7 +250,7 @@ quartus_url_170pro = {
 }
 
 quartus_url_170std = {
-    'setup' : "https://download.altera.com/akdlm/software/acdsinst/17.0std/595/ib_installers/QuartusSetup-17.0.0.595-linux.run",
+    'setup' : "https://download.altera.com/akdlm/software/acdsinst/17.0std/595/ib_installers/QuartusSetup-17.0.0.595-windows.exe",
     'a2' : "https://download.altera.com/akdlm/software/acdsinst/17.0std/595/ib_installers/arria-17.0.0.595.qdz",
     'a10_part1' : "https://download.altera.com/akdlm/software/acdsinst/17.0std/595/ib_installers/arria10_part1-17.0.0.595.qdz",
     'a10_part2' : "https://download.altera.com/akdlm/software/acdsinst/17.0std/595/ib_installers/arria10_part2-17.0.0.595.qdz",
@@ -266,7 +266,7 @@ quartus_url_170std = {
 }
 
 quartus_url_161std = {
-    'setup' : "https://download.altera.com/akdlm/software/acdsinst/16.1/196/ib_installers/QuartusSetup-16.1.0.196-linux.run",
+    'setup' : "https://download.altera.com/akdlm/software/acdsinst/16.1/196/ib_installers/QuartusSetup-16.1.0.196-windows.exe",
     'a2' : "https://download.altera.com/akdlm/software/acdsinst/16.1/196/ib_installers/arria-16.1.0.196.qdz",
     'a10_part1' : "https://download.altera.com/akdlm/software/acdsinst/16.1/196/ib_installers/arria10_part1-16.1.0.196.qdz",
     'a10_part2' : "https://download.altera.com/akdlm/software/acdsinst/16.1/196/ib_installers/arria10_part2-16.1.0.196.qdz",
@@ -281,12 +281,12 @@ quartus_url_161std = {
 }
 
 quartus_url_171lite = dict(quartus_url_171std)
-quartus_url_171lite['setup'] = "https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/QuartusLiteSetup-17.1.0.590-linux.run"
+quartus_url_171lite['setup'] = "https://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_installers/QuartusLiteSetup-17.1.0.590-windows.exe"
 
 
 quartus_url_160std = {
-	'setup' : 'https://download.altera.com/akdlm/software/acdsinst/16.0/211/ib_installers/QuartusSetup-16.0.0.211-linux.run',
-	'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/16.0/211/ib_installers/ModelSimSetup-16.0.0.211-linux.run',
+	'setup' : 'https://download.altera.com/akdlm/software/acdsinst/16.0/211/ib_installers/QuartusSetup-16.0.0.211-windows.exe',
+	'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/16.0/211/ib_installers/ModelSimSetup-16.0.0.211-windows.exe',
 	'a2' : 'https://download.altera.com/akdlm/software/acdsinst/16.0/211/ib_installers/arria-16.0.0.211.qdz',
 	'a10_part1' : 'https://download.altera.com/akdlm/software/acdsinst/16.0/211/ib_installers/arria10_part1-16.0.0.211.qdz',
 	'a10_part2' : 'https://download.altera.com/akdlm/software/acdsinst/16.0/211/ib_installers/arria10_part2-16.0.0.211.qdz',
@@ -302,8 +302,8 @@ quartus_url_160std = {
 }
 
 quartus_url_151std = {
-	'setup' : 'https://download.altera.com/akdlm/software/acdsinst/15.1/185/ib_installers/QuartusSetup-15.1.0.185-linux.run',
-	'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/15.1/185/ib_installers/ModelSimSetup-15.1.0.185-linux.run',
+	'setup' : 'https://download.altera.com/akdlm/software/acdsinst/15.1/185/ib_installers/QuartusSetup-15.1.0.185-windows.exe',
+	'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/15.1/185/ib_installers/ModelSimSetup-15.1.0.185-windows.exe',
 	'a2' : 'https://download.altera.com/akdlm/software/acdsinst/15.1/185/ib_installers/arria-15.1.0.185.qdz',
 	'a10_part1' : 'https://download.altera.com/akdlm/software/acdsinst/15.1/185/ib_installers/arria10_part1-15.1.0.185.qdz',
 	'a10_part2' : 'https://download.altera.com/akdlm/software/acdsinst/15.1/185/ib_installers/arria10_part2-15.1.0.185.qdz',
@@ -316,8 +316,8 @@ quartus_url_151std = {
 }
 
 quartus_url_150web = {
-        'setup' : 'https://download.altera.com/akdlm/software/acdsinst/15.0/145/ib_installers/QuartusSetupWeb-15.0.0.145-linux.run',
-        'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/15.0/145/ib_installers/ModelSimSetup-15.0.0.145-linux.run',
+        'setup' : 'https://download.altera.com/akdlm/software/acdsinst/15.0/145/ib_installers/QuartusSetupWeb-15.0.0.145-windows.exe',
+        'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/15.0/145/ib_installers/ModelSimSetup-15.0.0.145-windows.exe',
         'a2' : 'https://download.altera.com/akdlm/software/acdsinst/15.0/145/ib_installers/arria-15.0.0.145.qdz',
         'c4' : 'https://download.altera.com/akdlm/software/acdsinst/15.0/145/ib_installers/cyclone-15.0.0.145.qdz',
         'c5' : 'https://download.altera.com/akdlm/software/acdsinst/15.0/145/ib_installers/cyclonev-15.0.0.145.qdz',
@@ -326,8 +326,8 @@ quartus_url_150web = {
 }
 
 quartus_url_141web = {
-        'setup' : 'https://download.altera.com/akdlm/software/acdsinst/14.1/186/ib_installers/QuartusSetupWeb-14.1.0.186-linux.run',
-        'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/14.1/186/ib_installers/ModelSimSetup-14.1.0.186-linux.run',
+        'setup' : 'https://download.altera.com/akdlm/software/acdsinst/14.1/186/ib_installers/QuartusSetupWeb-14.1.0.186-windows.exe',
+        'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/14.1/186/ib_installers/ModelSimSetup-14.1.0.186-windows.exe',
         'a2' : 'https://download.altera.com/akdlm/software/acdsinst/14.1/186/ib_installers/arria-14.1.0.186.qdz',
         'c4' : 'https://download.altera.com/akdlm/software/acdsinst/14.1/186/ib_installers/cyclone-14.1.0.186.qdz',
         'c5' : 'https://download.altera.com/akdlm/software/acdsinst/14.1/186/ib_installers/cyclonev-14.1.0.186.qdz',
@@ -336,8 +336,8 @@ quartus_url_141web = {
 }
 
 quartus_url_140web = {
-        'setup' : 'https://download.altera.com/akdlm/software/acdsinst/14.0/200/ib_installers/QuartusSetupWeb-14.0.0.200-linux.run',
-        'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/14.0/200/ib_installers/ModelSimSetup-14.0.0.200-linux.run',
+        'setup' : 'https://download.altera.com/akdlm/software/acdsinst/14.0/200/ib_installers/QuartusSetupWeb-14.0.0.200-windows.exe',
+        'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/14.0/200/ib_installers/ModelSimSetup-14.0.0.200-windows.exe',
         'a2' : 'https://download.altera.com/akdlm/software/acdsinst/14.0/200/ib_installers/arria-14.0.0.200.qdz',
         'c4' : 'https://download.altera.com/akdlm/software/acdsinst/14.0/200/ib_installers/cyclone-14.0.0.200.qdz',
         'c5' : 'https://download.altera.com/akdlm/software/acdsinst/14.0/200/ib_installers/cyclonev-14.0.0.200.qdz',
@@ -345,8 +345,8 @@ quartus_url_140web = {
 }
 
 quartus_url_131web = {
-        'setup' : 'https://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/QuartusSetupWeb-13.1.0.162.run',
-        'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/ModelSimSetup-13.1.0.162.run',
+        'setup' : 'https://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/QuartusSetupWeb-13.1.0.162.exe',
+        'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/ModelSimSetup-13.1.0.162.exe',
         'a2' : 'https://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/arria-13.1.0.162.qdz',
         'c4' : 'https://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/cyclone-13.1.0.162.qdz',
         'c5' : 'https://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/cyclonev-13.1.0.162.qdz',
@@ -354,8 +354,8 @@ quartus_url_131web = {
 }
 
 quartus_url_130sp1web = {
-        'setup' : 'https://download.altera.com/akdlm/software/acdsinst/13.0sp1/232/ib_installers/QuartusSetupWeb-13.0.1.232.run',
-        'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/13.0sp1/232/ib_installers/ModelSimSetup-13.0.1.232.run',
+        'setup' : 'https://download.altera.com/akdlm/software/acdsinst/13.0sp1/232/ib_installers/QuartusSetupWeb-13.0.1.232.exe',
+        'modelsim' : 'https://download.altera.com/akdlm/software/acdsinst/13.0sp1/232/ib_installers/ModelSimSetup-13.0.1.232.exe',
         'a2' : 'https://download.altera.com/akdlm/software/acdsinst/13.0sp1/232/ib_installers/arria-13.0.1.232.qdz',
         'c4' : 'https://download.altera.com/akdlm/software/acdsinst/13.0sp1/232/ib_installers/cyclone-13.0.1.232.qdz',
         'c5' : 'https://download.altera.com/akdlm/software/acdsinst/13.0sp1/232/ib_installers/cyclonev-13.0.1.232.qdz',
@@ -427,28 +427,9 @@ def match_wanted_parts(version, devices):
 def download_quartus(version, parts, args):
     # convert the pieces we need to a list of URLs
     urls = {x: quartus_versions[version][x] for x in parts}.values()
-    (handle, urllistfile) = tempfile.mkstemp()
-    with open(urllistfile, 'w') as urlfile:
-        for url in urls:
-            urlfile.write("%s\n" % url)
-    if args.parallel != None:
-        parallel = '-x'+args.parallel
-    else:
-        print("Using default of %d parallel download connections" % default_parallel)
-        parallel = '-x'+str(default_parallel)
-    command = ['aria2c', '--continue', '--file-allocation=none', '--download-result=full', '--summary=300', parallel, '--input-file', urllistfile]
-    process = subprocess.Popen(command, bufsize=1)
-    try:
-        process.wait()
-    except KeyboardInterrupt:
-        try:
-            process.terminate()
-        except OSError:
-            pass
-        sys.exit(3)
-    rc = process.wait()
-    os.remove(urllistfile)
-    return rc, urls
+    for url in urls:
+            print(url)
+    return urls
 
 
 def install_quartus(version, installdir):
@@ -481,11 +462,6 @@ def cmd_exists(cmd):
 
 parser = argparse.ArgumentParser(description='Download and install Quartus.')
 parser.add_argument('--download-only', action='store_true', help='Only download, don\'t install')
-parser.add_argument('--install-only', action='store_true', help='Only install, don\'t download')
-parser.add_argument('--prune', action='store_true', help='Delete install files when finished')
-parser.add_argument('--nosetup', action='store_true', help="Don't download Quartus setup frontend")
-parser.add_argument('--parallel', '-j', action='store', help="Number of parallel download connections")
-parser.add_argument('--fix-libpng', action='store_true', help="Build and add libpng12.so binary")
 parser.add_argument('version', help='Quartus version, eg 18.0pro, 17.1lite, 16.1std')
 parser.add_argument('target', help='Directory to install Quartus in')
 parser.add_argument('device', nargs='+', help='Device to download/install in Quartus, eg s5 (Stratix 5), a10 (Arria 10), m2 (MAX II), c10gx (Cyclone 10GX)')
@@ -495,9 +471,6 @@ version = args.version
 target = args.target
 parts = []
 
-if not cmd_exists('aria2c'):
-    print("Please install the 'aria2' tool (command line executable 'aria2c')")
-    sys.exit(2)
 
 if version not in quartus_versions.keys():
     print("Unrecognised Quartus version '%s'" % version)
@@ -511,30 +484,10 @@ if not args.nosetup:
 parts = parts + match_wanted_parts(version, args.device)
 if not args.install_only:
     print("Downloading Quartus %s parts %s\n" % (version, parts))
-    rc, urls = download_quartus(version, parts, args)
+    urls = download_quartus(version, parts, args)
     for url in urls:
         leafname = url[url.rfind("/")+1:]
-        if os.path.exists(leafname) and leafname.endswith(".run"):
-            os.chmod(leafname, stat.S_IRWXU | stat.S_IXGRP | stat.S_IRGRP | stat.S_IXOTH | stat.S_IROTH)
 
-if not args.download_only:
-    print("Installing Quartus\n")
-    install_quartus(version, target)
-    for patch in parts:
-        if patch.split("_",1)[0] == "patch":
-            print("Installing patch %s\n" % (patch))
-            install_patch(version, target, patch)
-        if patch.split("_",1)[0] == "update":
-            print("Installing update %s\n" % (patch))
-            install_patch(version, target, patch)
 
-if args.prune and not args.install_only:
-    for url in urls:
-        leafname = url[url.rfind("/")+1:]
-        if os.path.exists(leafname):
-            os.remove(leafname)
 
-if args.fix_libpng:
-    scriptdir = os.path.dirname(os.path.abspath(__file__))
-    os.system(scriptdir+"/install-libpng.sh "+target+"/quartus/linux64")
 
