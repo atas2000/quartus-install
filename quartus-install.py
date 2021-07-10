@@ -479,13 +479,13 @@ if version not in quartus_versions.keys():
         print(key)
     sys.exit(1)
 
-if not args.nosetup:
-    parts = parts + ['setup']
+
+parts = parts + ['setup']
 parts = parts + match_wanted_parts(version, args.device)
-if not args.install_only:
-    print("Downloading Quartus %s parts %s\n" % (version, parts))
-    urls = download_quartus(version, parts, args)
-    for url in urls:
+
+print("URLs for Downloading Quartus %s parts %s\n" % (version, parts))
+urls = download_quartus(version, parts, args)
+for url in urls:
         leafname = url[url.rfind("/")+1:]
 
 
